@@ -17,4 +17,8 @@ export class ProductService {
   getProductById(id: number){
     return this.http.get(`${this.baseURL}Product/${id}`)
   }
+
+  deleteProduct(id: number){
+    return this.http.delete(`${this.baseURL}Product/${id}`)
+  }
 }

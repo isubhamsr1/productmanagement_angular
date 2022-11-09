@@ -16,7 +16,7 @@ export class ViewproductComponent implements OnInit {
 
   id!: number
 
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService) { }
+  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params['id'];
@@ -36,6 +36,25 @@ export class ViewproductComponent implements OnInit {
       else{
         this.error = false;
         this.product = (<any>res).data
+      }
+    }, err => {
+      this.error = true;
+      this.message = err.message
+    })
+  }
+
+  handleDelete(id: number){
+    this.productService.deleteProduct(id).subscribe((res)=>{
+      
+      const error = (<any>res).error;
+      if(error)
+      {
+        this.error = true;
+        this.message = (<any>res).message
+      }
+      else{
+        this.error = false;
+        this.router.navigate([''])
       }
       this.product = (<any>res).data
     }, err => {
