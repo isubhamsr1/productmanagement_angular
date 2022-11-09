@@ -8,7 +8,7 @@ import { ProductModel } from './Model/ProductModel'
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-
+  
   products = []
   error = false
   message!: string
