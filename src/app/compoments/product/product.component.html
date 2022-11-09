@@ -1,1 +1,20 @@
-<app-productlist></app-productlist>
+<div class="container">
+    <a type="button" routerLink="/add" class="btn btn-primary">Add Product</a>
+    <div *ngIf="error === false; else elseBlock">
+    <div *ngIf="products.length === 0; else elseBlock">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <div *ngFor="let product of products; index as i">
+            <app-productlist [product]="product" [i]="i"></app-productlist>
+        </div>
+    </ng-template>
+</div>
+<ng-template #elseBlock>
+    <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+</ng-template>
+</div>

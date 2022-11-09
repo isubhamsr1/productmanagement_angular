@@ -1,1 +1,22 @@
-<p>productlist works!</p>
+<div class="table-responsive">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">ShortDescription</th>
+        <th scope="col">Price</th>
+        <th scope="col">Bid End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{product.Name}}</td>
+        <td>{{product.ShortDescription.slice(0,65)}}...</td>
+        <td>{{product.Price}}</td>
+        <td>{{product.BidEndDate | date}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
