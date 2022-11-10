@@ -1,1 +1,67 @@
-<p>updateproduct works!</p>
+<div class="container ">
+
+    <div class="card center" style="width: 18rem;">
+      <div *ngIf="error;">
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+    </div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Name</label>
+              <input type="text" class="form-control"
+              [value]="Name"
+              [(ngModel)]="Name" 
+                  [ngModelOptions]="{standalone: true}" id="exampleFormControlInput1" placeholder="Name">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Short Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1"
+              [value]="ShortDescription"
+              [(ngModel)]="ShortDescription" 
+                  [ngModelOptions]="{standalone: true}" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" 
+              [value]="Description"
+              [(ngModel)]="Description" 
+                  [ngModelOptions]="{standalone: true}"rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Category</label>
+              <select [(ngModel)]="CategoryId" name="category"  class="form-select" aria-label="Default select example">
+                  <!-- <option selected>Open this select menu</option> -->
+                  <ng-container *ngFor="let item of categories;">
+                  <option value={{item.Id}} [selected]="item.Id">{{item.Name}}</option>
+                </ng-container>
+                  <!-- <option value="2">Two</option>
+                  <option value="3">Three</option> -->
+                </select>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Price</label>
+              <input class="form-control" id="exampleFormControlTextarea1"
+              [value]="Price"
+              [(ngModel)]="Price" 
+                  [ngModelOptions]="{standalone: true}" type="number" />
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Bid End Date</label>
+              <input class="form-control" id="exampleFormControlTextarea1"
+              [value]="BidEndDate"
+              [(ngModel)]="BidEndDate" 
+                  [ngModelOptions]="{standalone: true}" type="datetime-local" />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <div *ngIf="this.isSubmit != true; else elseBlock">Save</div>
+              <ng-template #elseBlock><div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div></ng-template>                       
+          </button>
+      </form>
+      </div>
+    </div>
+  
+</div>

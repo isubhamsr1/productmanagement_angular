@@ -31,6 +31,14 @@ export class ProductService {
     })
   }
 
+  updateProduct(body: any) {
+    return this.http.put(`${this.baseURL}Product`, body, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    })
+  }
+
   getCategories() {
     return this.http.get(`${this.baseURL}Category`)
   }
