@@ -1,22 +1,36 @@
-<div class="table-responsive">
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">ShortDescription</th>
-        <th scope="col">Price</th>
-        <th scope="col">Bid End Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">{{i+1}}</th>
-        <td><a [routerLink]="['/product', product.Id]">{{product.Name}}</a></td>
-        <td>{{product.ShortDescription.slice(0,65)}}...</td>
-        <td>{{product.Price}}</td>
-        <td>{{product.BidEndDate | date}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="error === false; else elseBlock">
+  <div *ngIf="products.length === 0; else elseBlock">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">ShortDescription</th>
+            <th scope="col">Price</th>
+            <th scope="col">Bid End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td><a [routerLink]="['/product', product.Id]">{{product.Name}}</a></td>
+            <td>{{product.ShortDescription.slice(0,65)}}...</td>
+            <td>{{product.Price}}</td>
+            <td>{{product.BidEndDate | date}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
 </div>
+<ng-template #elseBlock>
+  <div class="alert alert-danger" role="alert">
+    {{message}}
+  </div>
+</ng-template>
