@@ -4,16 +4,24 @@ import { AddproductComponent } from './compoments/product/addproduct/addproduct.
 import { ProductComponent } from './compoments/product/product.component';
 import { UpdateproductComponent } from './compoments/product/updateproduct/updateproduct.component';
 import { ViewproductComponent } from './compoments/product/viewproduct/viewproduct.component';
+import { SigninComponent } from './compoments/signin/signin.component';
+import { SignupComponent } from './compoments/signup/signup.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: ProductComponent },
-  { path: 'add', component: AddproductComponent },
-  { path: 'update/:id', component: UpdateproductComponent },
-  { path: 'product/:id', component: ViewproductComponent },
+  { path: '', component: ProductComponent, canActivate:[AuthGuard] },
+  { path: 'add', component: AddproductComponent, canActivate:[AuthGuard] },
+  { path: 'update/:id', component: UpdateproductComponent, canActivate:[AuthGuard] },
+  { path: 'product/:id', component: ViewproductComponent, canActivate:[AuthGuard] },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
+
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
