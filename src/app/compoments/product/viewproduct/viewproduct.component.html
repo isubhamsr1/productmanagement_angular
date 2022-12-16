@@ -4,6 +4,11 @@
             {{message}}
         </div>
     </div>
+    <div *ngIf="status === 401;">
+        <div class="alert alert-danger" role="alert">
+            <span>Session Expired, You need to<a aria-current="page" routerLink="/signin"> Signin</a></span>
+        </div>
+    </div>
     <ng-template #elseBlock>
         <div class="table-responsive">
             <table class="table">
@@ -29,7 +34,9 @@
         </div>
         <div class="center">
             <a type="button" [routerLink]="['/update', id]" class="btn btn-primary">Update</a>
-            <button type="button" class="btn btn-danger" (click)="handleDelete(id)">Delete</button>
+            <ng-container *ngIf="role === 'Admin'">
+                <button type="button" class="btn btn-danger" (click)="handleDelete(id)">Delete</button>
+            </ng-container>
         </div>
     </ng-template>
 </div>

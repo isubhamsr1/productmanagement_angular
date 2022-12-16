@@ -7,6 +7,7 @@ import { ViewproductComponent } from './compoments/product/viewproduct/viewprodu
 import { SigninComponent } from './compoments/signin/signin.component';
 import { SignupComponent } from './compoments/signup/signup.component';
 import { AuthGuard } from './services/auth.guard';
+import { SigninGuard } from './services/signin.guard';
 
 const routes: Routes = [
   { path: '', component: ProductComponent, canActivate:[AuthGuard] },
@@ -22,6 +23,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, SigninGuard]
 })
 export class AppRoutingModule { }

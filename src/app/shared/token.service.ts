@@ -9,7 +9,6 @@ export class TokenService {
 
   checkToken(){
     const token = localStorage.getItem("token");
-    console.log(token);
     
     if(token !== null){
       return true
@@ -37,5 +36,15 @@ export class TokenService {
     if(token === null){
       localStorage.setItem("token", tokenItem)
     }
+  }
+
+  decodeToken(){
+    const token = localStorage.getItem("token");
+    if(token !== null){
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      console.log(decodedToken.Role);
+      return decodedToken.Role;
+    }
+    
   }
 }

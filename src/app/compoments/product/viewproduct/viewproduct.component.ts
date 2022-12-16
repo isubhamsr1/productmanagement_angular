@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CanActivate, Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
+import { TokenService } from 'src/app/shared/token.service';
 import { ProductModel } from '../Model/ProductModel'
 
 @Component({
@@ -16,12 +17,16 @@ export class ViewproductComponent implements OnInit {
 
   id!: number
 
-  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService, private router: Router) { }
+  status!: null
+  role!: string
+
+  constructor(private activatedRoute: ActivatedRoute, private productService: ProductService, private router: Router, private tokenService: TokenService) { }
 
   ngOnInit(): void {
     let id = this.activatedRoute.snapshot.params['id'];
     this.id = id
     this.getProduct(id)
+    this.role = this.tokenService.decodeToken()
   }
 
   getProduct(id:number){
@@ -39,7 +44,8 @@ export class ViewproductComponent implements OnInit {
       }
     }, err => {
       this.error = true;
-      this.message = err.message
+      this.status = err.status
+      
     })
   }
 
@@ -59,7 +65,7 @@ export class ViewproductComponent implements OnInit {
       this.product = (<any>res).data
     }, err => {
       this.error = true;
-      this.message = err.message
+      this.status = err.status
     })
   }
 

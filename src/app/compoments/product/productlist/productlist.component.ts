@@ -15,6 +15,7 @@ export class ProductlistComponent implements OnInit {
   products!: ProductModel[]
   error = false
   message!: string
+  status!: null
 
   constructor(private productService:ProductService) { }
 
@@ -34,11 +35,11 @@ export class ProductlistComponent implements OnInit {
       }
       else{
         this.error = false;
+        this.products = (<any>res).data
       }
-      this.products = (<any>res).data
     }, err => {
       this.error = true;
-      this.message = err.message
+      this.status = err.status
     })
   }
 

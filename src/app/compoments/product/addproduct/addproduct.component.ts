@@ -22,6 +22,8 @@ export class AddproductComponent implements OnInit {
   message!: string
   isSubmit = false
 
+  status!: null
+
   categories!: CategoryModel[]
 
   constructor(private productService: ProductService, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -61,8 +63,8 @@ export class AddproductComponent implements OnInit {
     }, err => {
       this.error = true;
       this.isSubmit = false
-      this.message = err.message
-      
+      this.message = "Session Expired, You need to login";
+      this.status = err.status
     })
   }
 
@@ -81,8 +83,8 @@ export class AddproductComponent implements OnInit {
       }
     }, err => {
       this.error = true;
-      this.message = err.message
-      
+      this.message = "Session Expired, You need to login";
+      this.status = err.status
     })
   }
 

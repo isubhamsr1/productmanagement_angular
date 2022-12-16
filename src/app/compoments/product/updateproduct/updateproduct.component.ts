@@ -25,6 +25,7 @@ export class UpdateproductComponent implements OnInit {
   product!: ProductModel[]
 
   id!: number
+  status!: null
 
   categories!: CategoryModel[]
 
@@ -69,7 +70,8 @@ export class UpdateproductComponent implements OnInit {
     }, err => {
       this.error = true;
       this.isSubmit = false
-      this.message = err.message
+      this.message = "Session Expired, You need to login";
+      this.status = err.status
       
     })
   }
@@ -95,7 +97,8 @@ export class UpdateproductComponent implements OnInit {
       }
     }, err => {
       this.error = true;
-      this.message = err.message
+      this.message = "Session Expired, You need to login";
+      this.status = err.status
     })
   }
 
@@ -114,8 +117,8 @@ export class UpdateproductComponent implements OnInit {
       }
     }, err => {
       this.error = true;
-      this.message = err.message
-      
+      this.message = "Session Expired, You need to login";
+      this.status = err.status
     })
   }
 
